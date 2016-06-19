@@ -20,11 +20,11 @@ export default class Entity {
     context.fillRect(this.x, this.y, this.width, this.height)
   }
 
-  intersect() {
-    return this.y + this.height > other.y &&
-      this.y               < other.y + other.height &&
-      this.x + this.width  > other.x &&
-      this.x               < other.x + other.width
+  intersect(that) {
+    return this.y + this.height > that.y &&
+      this.y               < that.y + that.height &&
+      this.x + this.width  > that.x &&
+      this.x               < that.x + that.width
   }
 
 }

@@ -3,7 +3,7 @@ import Game from './game.js';
 import Entity from './entity';
 import Background from './background';
 import Ball from './ball';
-import {PlayerOne} from './rackets';
+import {PlayerOne, PlayerTwo} from './rackets';
 
 let canvas = document.querySelector("canvas"),
   game = new Game(canvas);
@@ -11,7 +11,8 @@ let canvas = document.querySelector("canvas"),
 game.entities = [
   new Background(game),
   game.ball = new Ball(game),
-  game.playerOne = new PlayerOne(game)
+  game.playerOne = new PlayerOne(game),
+  game.playerTwo = new PlayerTwo(game)
 ];
 
 game.start();

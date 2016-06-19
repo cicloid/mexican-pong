@@ -1,5 +1,3 @@
-'use strict';
-
 import Entity from './entity'
 
 export default class Ball extends Entity {
@@ -14,12 +12,63 @@ export default class Ball extends Entity {
     this.restart();
   }
 
+  _beep(type="square", freq=3000) {
+    if (!this.game.sound) return
+    var audioCtx = new (window.AudioContext || window.webkitAudioContext)()
+    let duration = 100
+
+    let osc = audioCtx.createOscillator()
+    osc.type = type
+    osc.frequency.value = freq // value in hertz
+    osc.connect(audioCtx.destination)
+    osc.start()
+
+    setTimeout( () => {
+      osc.stop()
+      audioCtx = undefined
+    }, duration);
+
+  }
+
   update() {
     super.update();
 
+    // Pong on vertical canvas walls
     if (this.y < 0 || this.y + this.height > this.game.height) {
       this.velocityY *= -1
+      this._beep()
     }
+
+    // Entity collision detection
+    if (this.intersect(this.game.playerOne)) {
+      var pong = this.game.playerOne
+      this._beep()
+    } else if (this.intersect(this.game.playerTwo)) {
+      var pong = this.game.playerTwo
+      this._beep()
+    }
+
+    // Ping
+    if (pong) {
+      this.velocityX *= -1.1 // Rebound and increase speed
+      this.velocityY *= 1.1
+
+      // Transfer some of the paddle vertical velocity to the ball
+      this.velocityY += pong.velocityY / 4
+    }
+
+    // Winning conditions
+    // PlayerOne
+    if (this.x > this.game.width) {
+      this.game.playerOne.points += 1
+      this.restart()
+    }
+    // PlayerTwo
+    if (this.x < -this.game.width) {
+      this.game.playerTwo.points += 1
+      this.restart()
+    }
+
   }
 
   restart() {
