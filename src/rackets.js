@@ -31,6 +31,7 @@ export class PlayerOne extends Player {
     super(game)
     this.x = 20
     this.speed = 15
+    this.height = 10 
   }
 
   update() {
