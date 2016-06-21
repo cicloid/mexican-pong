@@ -1,5 +1,5 @@
 {
-  "name": "Pong",
+  "name": "Mexican Pong",
   "version": "0.2.0",
   "description": "A simple pong kata while Mexico national socccer team plays the worst game in recorded history",
   "main": "index.js",
