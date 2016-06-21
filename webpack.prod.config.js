@@ -14,6 +14,10 @@ module.exports = {
     publicPath: '/public/'
   },
 
+  resolve: {
+    extensions: ['','.js', '.jsx'],
+  },
+
   plugins: [
     new webpack.optimize.DedupePlugin(),
     new webpack.optimize.UglifyJsPlugin({
