@@ -50,7 +50,7 @@ export class PlayerTwo extends Player {
   constructor(game) {
     super(game)
     this.speed = 5
-    this.x = this.game.width - this.width - 20
+    this.x = this.game.width - this.width - 30
   }
 
   update() {
